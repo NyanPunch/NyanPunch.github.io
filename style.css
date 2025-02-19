@@ -4,7 +4,11 @@
     box-sizing: border-box;
 }
 
-body {
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     color: #333;
@@ -41,20 +45,27 @@ nav {
     color: #ffd700;
 }
 
+.sections-container {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100vh;
+}
+
 section {
-    padding: 4rem 2rem;
-    min-height: 100vh;
+    min-width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 4rem 2rem;
 }
 
-#home {
-    background: url('https://source.unsplash.com/random/1600x900') no-repeat center center/cover;
-    color: #fff;
-}
+#home { background-color: #f1f1f1; }
+#about { background-color: #e1e1e1; }
+#projects { background-color: #d1d1d1; }
+#contact { background-color: #c1c1c1; }
 
 h1 {
     font-size: 3rem;
@@ -64,40 +75,6 @@ h1 {
 h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
-}
-
-.skills {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 2rem;
-}
-
-.skill {
-    background: #f4f4f4;
-    border-radius: 5px;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem;
-    font-size: 1.2rem;
-}
-
-.project-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.project-card {
-    background: #f4f4f4;
-    border-radius: 10px;
-    padding: 2rem;
-    margin: 1rem;
-    width: 300px;
-    transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
 }
 
 form {
@@ -128,9 +105,47 @@ button:hover {
     background: #555;
 }
 
-footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
+.project-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.project-card {
+    background: #f4f4f4;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 1rem;
+    width: 300px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.arrow {
+    position: fixed;
+    top: 50%;
+    font-size: 3rem;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.arrow:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.left-arrow {
+    left: 20px;
+}
+
+.right-arrow {
+    right: 20px;
 }
