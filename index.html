@@ -1,13 +1,73 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Portfolio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹 개발자 포트폴리오</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--좌우 화살표 슬라이드 전환-->
+<div class="arrow left-arrow">&lt;</div>
+<div class="arrow right-arrow">&gt;</div>
+
+<div class="container">
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#home">홈</a></li>
+            <li><a href="#about">소개</a></li>
+            <li><a href="#projects">프로젝트</a></li>
+            <li><a href="#contact">연락처</a></li>
+        </ul>
+    </nav>
+
+    <div class="sections-container">
+        <section id="home">
+            <h1>김경민</h1>
+            <h2>SW 비전 개발자 | 데이터 분석가 | 문제 해결사</h2>
+            <p>저는 최신 기술 트렌드를 따라가며 머신비전과 데이터 분석 분야에서 혁신적인 솔루션을 개발하는 데 열정을 가진 개발자입니다.</p>
+        </section>
+        <section id="about">
+            <h2>소개</h2>
+            <ul>
+                <p>학력: 충북대학교 (개신) 소프트웨어학과, 2019.03 ~ 2025.02 졸업</p>
+                <p>자격증: 정보처리기사</p>
+                <p>주요 기술: Python, SQL, Numpy, OpenCV, C, C++, JAVA, MySQL</p>
+            </ul>
+        </section>
+        <section id="projects">
+            <h2>프로젝트</h2>
+            <div class="project-container">
+                <a href="project-details">
+                    <div class="project-card" data-href="/TripleS">
+                        <h3>프로젝트 1</h3>
+                        <p>졸업논문 - 주정차 밀집 구역의 차대 사람 사고 예방을 위한 차량 사각지대 공유 시스템</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>프로젝트 2</h3>
+                        <p>딥러닝 기반 음악 기호 인식 프로젝트</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>프로젝트 3</h3>
+                        <p>초콜릿 체험관 포스기 데이터 분석 프로젝트</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <section id="contact">
+            <h2>연락처</h2>
+            <form id="contact-form">
+                <p><strong>이메일:</strong> <a href="mailto:kkmlouis@gmail.com">kkmlouis@gmail.com</a></p>
+                <p><strong>전화번호:</strong> 010-2798-7749</p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/NyanPunch" target="_blank">https://github.com/NyanPunch</a>
+                </p>
+                <p><strong>포트폴리오:</strong> <a
+                        href="https://drive.google.com/file/d/1try4vJGoSzT9svWYFWClc9qdk7SOIYO/view?usp=sharing"
+                        target="_blank">포트폴리오 보기</a></p>
+            </form>
+        </section>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
 </html>
