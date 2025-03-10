@@ -31,7 +31,7 @@ export const projects: Project[] = [
       {
         type: "paper",
         title: "(작성중)실시간 교통상황 탐지를 활용한 불법 주정차 밀집 구역 연계 사고 방지 시스템",
-        url: ""
+        url: "https://drive.google.com/file/d/1orCsRnN8PjTM77kdyMe0Qj-_-ET4XhIR/view?usp=sharing"
       }
     ]
   },
