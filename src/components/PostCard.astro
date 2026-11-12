@@ -1,0 +1,12 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import { formatDate, readingTime } from '../lib/posts';
+interface Props { post: CollectionEntry<'posts'>; featured?: boolean; }
+const {post, featured = false} = Astro.props;
+---
+<article class:list={['post-card', {featured}]} data-post data-category={post.data.category} data-search={`${post.data.title} ${post.data.description} ${post.data.tags.join(' ')}`.toLowerCase()}>
+  {featured && <a class="post-cover" href={`/posts/${post.id}/`} tabindex="-1" aria-hidden="true"><img src={post.data.cover || '/images/vision.svg'} alt="" width="640" height="420"/></a>}
+  <div class="post-content"><div class="post-labels"><span class="category-label">{post.data.category}</span>{post.data.sample && <span class="sample-label">예시 글</span>}</div><h3><a href={`/posts/${post.id}/`}>{post.data.title}</a></h3><p>{post.data.description}</p><div class="post-meta"><span><Icon name="calendar" size={15}/><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time></span><span class="meta-divider"></span><span><Icon name="book" size={15}/>{readingTime(post.body)}분 읽기</span></div></div>
+  <span class="post-arrow" aria-hidden="true"><Icon name="external"/></span>
+</article>

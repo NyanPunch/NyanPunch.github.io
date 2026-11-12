@@ -1,0 +1,8 @@
+---
+import Base from '../../layouts/Base.astro';
+import Filters from '../../components/Filters.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPosts } from '../../lib/posts';
+const posts = await getPosts();
+---
+<Base title="모든 글" description="Python, 컴퓨터 비전, 데이터 분석과 개발 과정의 기록을 모았습니다."><header class="page-heading"><p class="eyebrow">THE ARCHIVE</p><h1>차곡차곡 쌓아가는 기록<span class="brand-dot">.</span></h1><p>작은 발견부터 깊이 있는 탐구까지. 관심 있는 주제를 찾아보세요.</p></header><Filters searchable/><section class="archive-posts"><div class="section-heading"><h2>모든 글 <span class="count" id="result-count">{String(posts.length).padStart(2,'0')}</span></h2></div>{posts.map(post => <PostCard post={post}/>)}<div id="no-results" class="empty-state" hidden><p>일치하는 글을 찾지 못했어요.</p><span>다른 키워드나 카테고리로 검색해 보세요.</span></div></section></Base>

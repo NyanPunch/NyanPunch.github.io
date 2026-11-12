@@ -1,0 +1,6 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { projects } from '../../data/projects';
+---
+<Base title="프로젝트" description="컴퓨터 비전과 데이터 분석을 활용한 프로젝트와 작업 기록입니다."><header class="page-heading"><p class="eyebrow">SELECTED WORKS</p><h1>직접 만들며 배운 것들<span class="brand-dot">.</span></h1><p>아이디어를 구현하고, 문제를 해결해 나간 과정입니다.</p></header><div class="projects-grid">{projects.filter(p=>p.id<=3).map((p,i)=><a class="project-tile" href={`/projects/${p.id}/`}><div class:list={['project-art',`art-${i}`]}><span class="project-number">0{i+1}</span><span class="art-symbol">{['⌖','♫','▥'][i]}</span><span class="art-label">{['COMPUTER VISION','MUSIC × DEEP LEARNING','DATA ANALYTICS'][i]}</span></div><div class="project-tile-content"><p class="eyebrow">{p.period}</p><h2>{p.title}<Icon name="external" size={21}/></h2><p>{p.fullDescription}</p><div class="tag-list">{p.technologies.slice(0,3).map(t=><span>{t}</span>)}</div></div></a>)}</div></Base>

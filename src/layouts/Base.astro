@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+import { site } from '../config';
+import Cat from '../components/Cat.astro';
+import Icon from '../components/Icon.astro';
+interface Props { title?: string; description?: string; article?: { date: Date; tags: string[] }; noindex?: boolean; }
+const { title, description = site.description, article, noindex = false } = Astro.props;
+const pageTitle = title ? `${title} | ${site.title}` : `${site.title} — 배우고, 만들고, 기록합니다.`;
+const canonical = new URL(Astro.url.pathname, site.url);
+const active = Astro.url.pathname;
+const nav = [{href:'/',label:'블로그'}, {href:'/projects/',label:'프로젝트'}, {href:'/about/',label:'소개'}];
+const schema = article ? { '@context': 'https://schema.org', '@type':'BlogPosting', headline:title, description, datePublished:article.date.toISOString(), author:{'@type':'Person',name:'NyanPunch',url:site.url+'/about/'}, mainEntityOfPage:canonical.href, keywords:article.tags.join(', ') } : {'@context':'https://schema.org','@type':'WebSite',name:site.title,url:site.url,description};
+---
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{pageTitle}</title><meta name="description" content={description}/>
+  <link rel="canonical" href={canonical}/><link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="alternate" type="application/rss+xml" title="NyanPunch RSS" href="/rss.xml"/>
+  <meta property="og:title" content={pageTitle}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:locale" content="ko_KR"/><meta property="og:site_name" content={site.title}/><meta property="og:type" content={article ? 'article' : 'website'}/><meta property="og:image" content={new URL('/images/og.png', site.url)}/><meta name="twitter:card" content="summary_large_image"/>
+  {article && <meta property="article:published_time" content={article.date.toISOString()}/>}
+  {noindex && <meta name="robots" content="noindex, follow"/>}
+  <meta name="theme-color" content="#ffffff"/>
+  <script is:inline>try{document.documentElement.dataset.theme=localStorage.getItem('theme') || 'light'}catch{}</script>
+  <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\u003c')}/>
+  {site.adsense.enabled && /^ca-pub-\d+$/.test(site.adsense.client) && <script is:inline async crossorigin="anonymous" src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${site.adsense.client}`}></script>}
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header shell">
+    <a href="/" class="brand" aria-label="NyanPunch 홈"><span class="brand-cat"><Cat/></span><span>NyanPunch<span class="brand-dot">.</span></span></a>
+    <nav class="main-nav" aria-label="주 메뉴">{nav.map(item => <a href={item.href} class:list={[{active: item.href === '/' ? active === '/' || active.startsWith('/posts/') : active.startsWith(item.href)}]} aria-current={(item.href === '/' ? active === '/' || active.startsWith('/posts/') : active.startsWith(item.href)) ? 'page' : undefined}>{item.label}</a>)}</nav>
+    <div class="header-actions"><a class="icon-button" href="/posts/?search=1" aria-label="글 검색"><Icon name="search"/></a><button id="theme-toggle" class="icon-button" aria-label="다크 모드 켜기" aria-pressed="false"><span class="moon-icon"><Icon name="moon"/></span><span class="sun-icon"><Icon name="sun"/></span></button></div>
+  </header>
+  <main id="main" class="shell"><slot/></main>
+  <footer class="site-footer shell"><a class="footer-brand" href="/">© {new Date().getUTCFullYear()} NyanPunch<span class="brand-dot">.</span></a><span class="footer-note">조금씩 배우고, 꾸준히 기록하기.</span><nav aria-label="푸터"><a href={site.github} target="_blank" rel="noopener noreferrer">GitHub <Icon name="external" size={13}/></a><a href="/privacy/">개인정보처리방침</a><a href="/rss.xml">RSS <span aria-hidden="true">↗</span></a></nav></footer>
+  <script>
+    const button = document.querySelector<HTMLButtonElement>('#theme-toggle');
+    const update = () => { const dark = document.documentElement.dataset.theme === 'dark'; button?.setAttribute('aria-pressed', String(dark)); button?.setAttribute('aria-label', dark ? '라이트 모드 켜기' : '다크 모드 켜기'); };
+    update();
+    button?.addEventListener('click', () => { const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = next; try{localStorage.setItem('theme', next)}catch{} update(); });
+  </script>
+</body>
+</html>
