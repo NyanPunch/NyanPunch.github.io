@@ -1,0 +1,6 @@
+---
+import { site } from '../config';
+const ads = site.adsense;
+const enabled = ads.enabled && /^ca-pub-\d+$/.test(ads.client) && /^\d+$/.test(ads.sidebarSlot);
+---
+{enabled && <section class="ad-slot" aria-label="광고"><span class="eyebrow">ADVERTISEMENT</span><ins class="adsbygoogle" style="display:block" data-ad-client={ads.client} data-ad-slot={ads.sidebarSlot} data-ad-format="auto" data-full-width-responsive="true"></ins><script is:inline>(window.adsbygoogle = window.adsbygoogle || []).push({});</script></section>}

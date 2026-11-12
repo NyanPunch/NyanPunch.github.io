@@ -1,0 +1,27 @@
+---
+interface Props { variant?: 'face' | 'hero'; }
+const { variant = 'face' } = Astro.props;
+---
+{variant === 'face' ? (
+<svg viewBox="0 0 80 70" fill="none" aria-hidden="true">
+  <path d="M14 29 17 6l18 16h13L64 7l3 25c16 30-3 34-27 34S2 53 14 29Z" fill="var(--surface)" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="m48 22 16-15 3 25-16-2Z" fill="#96b8a6"/>
+  <path d="m27 39 1 1m24-1 1 1M37 48l4 3 4-3M41 51v4m-23-9L3 43m15 9L2 55m60-9 15-3m-15 9 16 3" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="25" cy="48" rx="5" ry="2.5" fill="#dbe9df"/><ellipse cx="56" cy="48" rx="5" ry="2.5" fill="#dbe9df"/>
+</svg>
+) : (
+<svg viewBox="0 0 460 240" fill="none" role="img" aria-label="노트북으로 개발하는 초록색 귀의 고양이">
+  <ellipse cx="248" cy="220" rx="184" ry="12" fill="#e2eee7"/>
+  <path d="M348 168c54 4 74-35 48-67-15-19-9-28 4-24 35 12 54 82 11 111-20 14-43 15-59 12" fill="#94b6a3" stroke="currentColor" stroke-width="3"/>
+  <path d="M241 137c35-24 84-20 109 10 23 29 7 69-17 72h-96c-45-8-53-49 4-82Z" fill="var(--surface)" stroke="currentColor" stroke-width="3"/>
+  <path d="m185 103 5-55 44 30 40-4 32-24 4 61c20 62-21 83-70 76-49-7-81-39-55-84Z" fill="var(--surface)" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  <path d="m274 74 32-24 4 61c-24 8-48-2-53-23Z" fill="#91b49f"/>
+  <path d="m211 119 8-6 8 8m35-3 8-4 7 8m-38 13 5 3 6-3m-6 3-1 7m-44-10-30-7m28 17-30 3m118-9 29-9m-28 20 30 2" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <path d="M218 177c-24 6-29 15-16 22l32 8m59-30c-14 17-22 30-10 39h29m-93-20-33-15-23-23c-11-7-15 3-6 14l22 26 32 16" fill="var(--surface)" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <path d="m71 164 79 3 24 54H92Z" fill="#d5e5db" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M92 221h117" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  <path d="m113 192 5-4 7 4-6 6Z" fill="#237856"/>
+  <path d="m99 84-13 13 13 13m36-26 13 13-13 13m-16-32-9 39" stroke="#237856" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m226 35-3-13m17 12 5-12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+</svg>
+)}

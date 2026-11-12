@@ -1,0 +1,8 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { projects } from '../../data/projects';
+export function getStaticPaths(){return projects.filter(p=>p.id<=3).map(project=>({params:{id:String(project.id)},props:{project}}));}
+const {project} = Astro.props;
+---
+<Base title={project.title} description={project.fullDescription}><article class="project-detail"><header class="article-heading"><a class="back-link" href="/projects/">← 모든 프로젝트</a><p class="eyebrow">PROJECT 0{project.id}</p><h1>{project.title}</h1><p class="article-description">{project.description}</p><div class="tag-list">{project.technologies.map(t=><span>{t}</span>)}</div></header><dl class="project-facts"><div><dt>기간</dt><dd>{project.period}</dd></div><div><dt>역할</dt><dd>{project.role}</dd></div></dl><div class="prose"><h2>프로젝트 소개</h2><p>{project.fullDescription}</p><h2>주요 기능</h2><ul>{project.features.map(f=><li>{f}</li>)}</ul><h2>자료와 링크</h2><div class="reference-links">{project.github && <a href={project.github} target="_blank" rel="noopener noreferrer"><Icon name="github" size={20}/> GitHub 저장소 <Icon name="external" size={18}/></a>}{project.references?.filter(r=>r.url && !r.url.includes('example.com')).map(r=><a href={r.url} target="_blank" rel="noopener noreferrer">{r.title}<Icon name="external" size={18}/></a>)}</div></div></article></Base>

@@ -1,0 +1,30 @@
+---
+import {categories} from '../config';
+const { searchable = false } = Astro.props;
+---
+<div class="filters-area">
+  {searchable && <div class="search-field"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/></svg><input id="post-search" type="search" placeholder="궁금한 주제나 키워드를 검색해 보세요" aria-label="글 검색" autocomplete="off"/><span class="search-hint">검색</span></div>}
+  <div class="category-filters" role="group" aria-label="글 카테고리">{categories.map((category, i) => <button type="button" class:list={['filter-chip',{selected:i===0}]} data-filter={category} aria-pressed={i===0}>{category}</button>)}</div>
+</div>
+<script>
+  const filters = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-post]')];
+  const input = document.querySelector<HTMLInputElement>('#post-search');
+  const empty = document.querySelector<HTMLElement>('#no-results');
+  const count = document.querySelector<HTMLElement>('#result-count');
+  let selected = '전체';
+  const filter = () => {
+    const query = input?.value.trim().toLocaleLowerCase() || '';
+    let visible = 0;
+    cards.forEach(card => { const matches = (selected === '전체' || card.dataset.category === selected) && (!query || (card.dataset.search || '').includes(query)); card.hidden = !matches; if(matches) visible++; });
+    if(empty) empty.hidden = visible > 0;
+    if(count) count.textContent = String(visible).padStart(2,'0');
+  };
+  const select = (category: string) => { selected = category; filters.forEach(button => {const active = button.dataset.filter === selected; button.classList.toggle('selected',active); button.setAttribute('aria-pressed',String(active));}); filter(); };
+  filters.forEach(button => button.addEventListener('click', () => select(button.dataset.filter || '전체')));
+  input?.addEventListener('input', filter);
+  const params = new URLSearchParams(location.search);
+  const category = params.get('category');
+  if(category && filters.some(button=>button.dataset.filter===category)) select(category);
+  if(params.has('search')) input?.focus();
+</script>
