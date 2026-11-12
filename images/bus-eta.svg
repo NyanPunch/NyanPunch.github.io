@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
+  <defs><pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0v32" fill="none" stroke="#fff" stroke-opacity=".42"/></pattern></defs>
+  <rect width="640" height="420" fill="#dcece2"/>
+  <rect width="640" height="420" fill="url(#grid)"/>
+  <text x="40" y="57" font-family="sans-serif" font-size="15" letter-spacing="3" fill="#29664a">CHEONAN · BUS ETA</text>
+  <path d="M55 307h130q35 0 35-35V172q0-35 35-35h135q35 0 35 35v100q0 35 35 35h125" fill="none" stroke="#8fb49e" stroke-width="14" stroke-linecap="round"/>
+  <path d="M55 307h130q35 0 35-35V172q0-35 35-35h75" fill="none" stroke="#266e4c" stroke-width="5" stroke-linecap="round"/>
+  <g fill="#fff" stroke="#266e4c" stroke-width="4"><circle cx="88" cy="307" r="10"/><circle cx="220" cy="215" r="10"/><circle cx="425" cy="215" r="10"/><circle cx="555" cy="307" r="10"/></g>
+  <rect x="276" y="101" width="91" height="64" rx="12" fill="#fff" stroke="#266e4c" stroke-width="3"/>
+  <rect x="287" y="112" width="69" height="25" rx="4" fill="#8fb49e"/>
+  <path d="M321 113v23" stroke="#fff" stroke-width="3"/>
+  <g fill="#266e4c"><circle cx="294" cy="148" r="4"/><circle cx="348" cy="148" r="4"/><rect x="289" y="162" width="12" height="8" rx="3"/><rect x="343" y="162" width="12" height="8" rx="3"/></g>
+  <text x="40" y="381" font-family="monospace" font-size="13" letter-spacing="2" fill="#29664a">COLLECT → NORMALIZE → REPLAY</text>
+</svg>

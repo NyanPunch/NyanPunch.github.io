@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ko"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>천안 버스 ETA 프로젝트 ① — 예측 모델보다 데이터 수집부터 시작한 이유 | NyanPunch</title><meta name="description" content="차량 ID 없이 버스 도착정보를 연결하려면 무엇부터 준비해야 할까? 천안 버스 ETA 프로젝트의 목표와 데이터 수집부터 시작한 이유를 정리합니다."><link rel="canonical" href="https://nyanpunch.github.io/posts/bus-eta-01-project-introduction/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="NyanPunch RSS" href="/rss.xml"><meta property="og:title" content="천안 버스 ETA 프로젝트 ① — 예측 모델보다 데이터 수집부터 시작한 이유 | NyanPunch"><meta property="og:description" content="차량 ID 없이 버스 도착정보를 연결하려면 무엇부터 준비해야 할까? 천안 버스 ETA 프로젝트의 목표와 데이터 수집부터 시작한 이유를 정리합니다."><meta property="og:url" content="https://nyanpunch.github.io/posts/bus-eta-01-project-introduction/"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="NyanPunch"><meta property="og:type" content="article"><meta property="og:image" content="https://nyanpunch.github.io/images/og.png"><meta name="twitter:card" content="summary_large_image"><meta property="article:published_time" content="2026-11-12T00:00:00.000Z"><meta name="theme-color" content="#ffffff"><script>try{document.documentElement.dataset.theme=localStorage.getItem('theme') || 'light'}catch{}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"천안 버스 ETA 프로젝트 ① — 예측 모델보다 데이터 수집부터 시작한 이유","description":"차량 ID 없이 버스 도착정보를 연결하려면 무엇부터 준비해야 할까? 천안 버스 ETA 프로젝트의 목표와 데이터 수집부터 시작한 이유를 정리합니다.","datePublished":"2026-11-12T00:00:00.000Z","author":{"@type":"Person","name":"NyanPunch","url":"https://nyanpunch.github.io/about/"},"mainEntityOfPage":"https://nyanpunch.github.io/posts/bus-eta-01-project-introduction/","keywords":"bus-eta-predict, TAGO, 버스 ETA, 프로젝트 설계"}</script><link rel="stylesheet" href="/_astro/about.BjtqbOvF.css"></head> <body> <a class="skip-link" href="#main">본문 바로가기</a> <header class="site-header shell"> <a href="/" class="brand" aria-label="NyanPunch 홈"><span class="brand-cat"><svg viewBox="0 0 80 70" fill="none" aria-hidden="true"><path d="M14 29 17 6l18 16h13L64 7l3 25c16 30-3 34-27 34S2 53 14 29Z" fill="var(--surface)" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path><path d="m48 22 16-15 3 25-16-2Z" fill="#96b8a6"></path><path d="m27 39 1 1m24-1 1 1M37 48l4 3 4-3M41 51v4m-23-9L3 43m15 9L2 55m60-9 15-3m-15 9 16 3" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path><ellipse cx="25" cy="48" rx="5" ry="2.5" fill="#dbe9df"></ellipse><ellipse cx="56" cy="48" rx="5" ry="2.5" fill="#dbe9df"></ellipse></svg></span><span>NyanPunch<span class="brand-dot">.</span></span></a> <nav class="main-nav" aria-label="주 메뉴"><a href="/" class="active" aria-current="page">블로그</a><a href="/projects/">프로젝트</a><a href="/about/">소개</a></nav> <div class="header-actions"><a class="icon-button" href="/posts/?search=1" aria-label="글 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 21l-5.2-5.2M19 10.5a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0"></path></svg></a><button id="theme-toggle" class="icon-button" aria-label="다크 모드 켜기" aria-pressed="false"><span class="moon-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 0 1 11.2 3 9 9 0 1 0 21 12.8Z"></path></svg></span><span class="sun-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0"></path></svg></span></button></div> </header> <main id="main" class="shell"> <article class="article-layout"><header class="article-heading"><a class="back-link" href="/posts/">← 모든 글</a><div class="post-labels"><a class="category-label" href="/posts/?category=%EA%B0%9C%EB%B0%9C%20%EA%B8%B0%EB%A1%9D">개발 기록</a></div><h1>천안 버스 ETA 프로젝트 ① — 예측 모델보다 데이터 수집부터 시작한 이유</h1><p class="article-description">차량 ID 없이 버스 도착정보를 연결하려면 무엇부터 준비해야 할까? 천안 버스 ETA 프로젝트의 목표와 데이터 수집부터 시작한 이유를 정리합니다.</p><div class="post-meta"><span><time datetime="2026-11-12T00:00:00.000Z">2026.11.12</time></span><span class="meta-divider"></span><span>4분 읽기</span><span class="meta-divider"></span><span>NyanPunch</span></div></header> <div class="article-grid"><div><div class="prose"><p>버스 도착정보 API에는 “몇 초 뒤 도착하는지”, “몇 정류장 전에 있는지” 같은 정보가 담겨 있다. 이 정보를 시간순으로 모으면 버스의 이동을 추적하고 도착시간을 예측하는 데 활용할 수 있지 않을까?</p>
+<p><code>bus-eta-predict</code>는 이 질문에서 출발한 프로젝트다. 천안시 버스 도착정보를 수집하고, 여러 시점과 정류장의 관측을 연결해 버스 운행을 추적하는 기반을 만드는 것이 목표다.</p>
+<p>다만 프로젝트 이름에 ETA가 들어간다고 해서 처음부터 예측 모델을 학습한 것은 아니다. 먼저 해결해야 할 문제는 <strong>API 응답을 어떤 의미의 데이터로 해석할 것인가</strong>였다.</p>
+<h2 id="도착정보-한-줄은-버스-한-대의-고유한-기록일까">도착정보 한 줄은 버스 한 대의 고유한 기록일까?</h2>
+<p>이 프로젝트의 출발 조건은 도착정보 관측을 연결할 때 차량 ID에 의존하지 않는다는 것이다.</p>
+<p>예를 들어 한 정류장에서 다음과 같은 정보가 반복해서 들어왔다고 하자.</p>
+<table>
+<thead>
+<tr>
+<th>관측 시점</th>
+<th>노선</th>
+<th align="right">남은 정류장 수</th>
+<th align="right">도착 예정시간</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>첫 번째 조회</td>
+<td>7번</td>
+<td align="right">5개</td>
+<td align="right">300초</td>
+</tr>
+<tr>
+<td>두 번째 조회</td>
+<td>7번</td>
+<td align="right">4개</td>
+<td align="right">260초</td>
+</tr>
+</tbody>
+</table>
+<p>두 관측은 같은 버스를 나타낼 가능성이 있다. 하지만 값이 비슷하다는 이유만으로 같은 버스라고 확정할 수는 없다. 같은 노선을 운행하는 다른 버스가 있을 수도 있고, 원천 정보의 갱신이 늦을 수도 있기 때문이다.</p>
+<p>반대 상황도 있다. 서로 다른 두 정류장에서 받은 도착정보가 실제로는 같은 버스를 가리킬 수 있다. 따라서 응답 항목을 모두 별개의 버스로 세는 방식도 적절하지 않다.</p>
+<p>이 프로젝트에서 추적하려는 대상은 우선 **여러 관측을 연결한 운행 기록인 <code>track</code>**이다. 이 기록이 특정 물리적 차량의 하루 전체 운행과 같다는 보장은 두지 않았다.</p>
+<h2 id="처음부터-노선-전체를-다루지-않았다">처음부터 노선 전체를 다루지 않았다</h2>
+<p>초기 대상은 천안시의 2번, 5번, 7번 노선이다. 여기서 노선번호는 세 개지만 실제 분석 대상 <code>route_id</code>는 네 개다. 조회 결과에서 5번이 서로 다른 두 ID로 구분됐기 때문이다.</p>
+<p>같은 번호라는 이유로 두 경로를 합치거나, 번호만 보고 방향을 추정하지 않았다. 우선 API에서 받은 노선 ID와 경유 정류장 목록을 각각 보존하는 방식으로 시작했다.</p>
+<p>관측 정류장도 처음에는 두 곳으로 제한했다. 이 두 곳에서 노선의 모든 버스를 볼 수 있다고 가정하지는 않았다. 작은 범위에서 응답 구조와 저장 흐름이 실제로 연결되는지 먼저 확인하기 위한 선택이었다.</p>
+<h2 id="api에서-안-보인다는-것이-운행하지-않는다는-뜻은-아니다">API에서 안 보인다는 것이 운행하지 않는다는 뜻은 아니다</h2>
+<p>관측 데이터를 다룰 때 가장 조심한 부분은 ‘정보가 없음’의 해석이다.</p>
+<p>조회 결과에 버스가 나타나지 않는 이유는 여러 가지일 수 있다.</p>
+<ul>
+<li>해당 조회 범위에 도착정보가 없을 수 있다.</li>
+<li>API 요청이나 응답 파싱이 실패했을 수 있다.</li>
+<li>여러 페이지 중 일부만 수집했을 수 있다.</li>
+<li>관측하는 정류장에서 아직 확인할 수 없는 버스일 수 있다.</li>
+</ul>
+<p>이 상황을 모두 “버스가 없다”로 처리하면, 수집 과정의 문제를 운행 상태로 잘못 해석하게 된다.</p>
+<p>그래서 정상적인 빈 응답, 통신 오류, API 오류, 불완전한 페이지 수집을 구분해 기록하기로 했다. API 목록에서 사라졌다는 이유만으로 도착이나 결행을 확정하지 않는 것도 같은 이유다.</p>
+<h2 id="개발-순서는-원본에서-예측으로">개발 순서는 원본에서 예측으로</h2>
+<p>전체 흐름은 다음과 같이 잡았다.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>제한된 API 수집</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>요청·응답 원본 저장</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>관측 데이터 정규화</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>시간순 재생과 버스 추적</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>실제 도착 정답 확보</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>ETA 예측과 평가</span></span></code></pre>
+<p>이 순서의 핵심은 원본을 남기는 것이다. 정규화나 추적 알고리즘을 수정했을 때, 같은 입력으로 다시 실험할 수 있어야 한다.</p>
+<p>현재 저장소에는 실제 수집·저장과 오프라인 추적 재생까지 연결돼 있다. 온라인 상시 추적과 실제 도착 정답을 이용한 ETA 모델은 후속 단계다.</p>
+<p>이번 시리즈의 앞부분에서는 그중 수집, 저장, 정규화와 재생을 차례로 정리한다. 다음 글에서는 API를 얼마나 자주 호출할지, 어떤 내용을 DB에 남길지부터 살펴본다.</p>
+<h2 id="시리즈-이어-읽기">시리즈 이어 읽기</h2>
+<ol>
+<li><strong>프로젝트를 시작한 이유와 해결하려는 문제</strong> — 현재 글</li>
+<li><a href="/posts/bus-eta-02-tago-collection/">TAGO 버스 도착정보 수집하기 — 호출 예산과 PostgreSQL 원본 저장</a></li>
+<li><a href="/posts/bus-eta-03-normalization-replay/">저장한 도착정보를 다시 실험하기 — 정규화와 오프라인 재생</a></li>
+</ol></div><div class="tag-list"><span>#bus-eta-predict</span><span>#TAGO</span><span>#버스 ETA</span><span>#프로젝트 설계</span></div><div class="article-bottom"><a class="text-link" href="/posts/">← 글 목록으로</a><button id="copy-link" class="text-link" type="button">링크 복사 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"></path></svg></button><span id="copy-status" role="status" class="copy-status"></span></div></div> <aside class="toc"><p class="eyebrow">ON THIS PAGE</p><nav aria-label="글 목차"><a href="#도착정보-한-줄은-버스-한-대의-고유한-기록일까">도착정보 한 줄은 버스 한 대의 고유한 기록일까?</a><a href="#처음부터-노선-전체를-다루지-않았다">처음부터 노선 전체를 다루지 않았다</a><a href="#api에서-안-보인다는-것이-운행하지-않는다는-뜻은-아니다">API에서 안 보인다는 것이 운행하지 않는다는 뜻은 아니다</a><a href="#개발-순서는-원본에서-예측으로">개발 순서는 원본에서 예측으로</a><a href="#시리즈-이어-읽기">시리즈 이어 읽기</a></nav></aside></div> <section class="related-posts"><div class="section-heading"><h2>이런 기록도 있어요</h2></div><div class="related-grid"><a href="/posts/bus-eta-02-tago-collection/"><span class="category-label">개발 기록</span><h3>천안 버스 ETA 프로젝트 ② — TAGO 수집, 호출 예산과 PostgreSQL 원본 저장</h3><span class="text-link">읽어보기 →</span></a><a href="/posts/bus-eta-03-normalization-replay/"><span class="category-label">개발 기록</span><h3>천안 버스 ETA 프로젝트 ③ — 관측 데이터 정규화와 오프라인 재생</h3><span class="text-link">읽어보기 →</span></a></div></section></article> <script type="module">document.querySelector("#copy-link")?.addEventListener("click",async()=>{const t=document.querySelector("#copy-status");try{await navigator.clipboard.writeText(location.href),t&&(t.textContent="링크를 복사했어요.")}catch{t&&(t.textContent="주소창의 링크를 복사해 주세요.")}});</script> </main> <footer class="site-footer shell"><a class="footer-brand" href="/">© 2026 NyanPunch<span class="brand-dot">.</span></a><span class="footer-note">조금씩 배우고, 꾸준히 기록하기.</span><nav aria-label="푸터"><a href="https://github.com/NyanPunch" target="_blank" rel="noopener noreferrer">GitHub <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"></path></svg></a><a href="/privacy/">개인정보처리방침</a><a href="/rss.xml">RSS <span aria-hidden="true">↗</span></a></nav></footer> <script type="module">const e=document.querySelector("#theme-toggle"),a=()=>{const t=document.documentElement.dataset.theme==="dark";e?.setAttribute("aria-pressed",String(t)),e?.setAttribute("aria-label",t?"라이트 모드 켜기":"다크 모드 켜기")};a();e?.addEventListener("click",()=>{const t=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=t;try{localStorage.setItem("theme",t)}catch{}a()});</script> </body> </html>
