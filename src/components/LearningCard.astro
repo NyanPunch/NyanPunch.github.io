@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+import { publicDataLearning as learning } from '../data/public-data-learning';
+---
+<a class="learning-card" href={learning.href}>
+  <div class="learning-cover" aria-hidden="true">
+    <span class="eyebrow">PUBLIC DATA STUDIES</span>
+    <div class="learning-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <span class="cover-caption">READ. CLEAN. VISUALIZE.</span>
+  </div>
+  <div class="learning-copy">
+    <div class="learning-card-meta"><span class="category-label">학습 기록</span><span>{learning.period}</span></div>
+    <h3>{learning.title}<Icon name="external" size={22}/></h3>
+    <p>{learning.description}</p>
+    <div class="tag-list">{learning.technologies.map(tech => <span>{tech}</span>)}</div>
+    <div class="learning-card-bottom"><span>저장소 3개 · 연도별 학습 과정</span><span class="text-link">기록 살펴보기 <Icon name="arrow" size={17}/></span></div>
+  </div>
+</a>
+<style>
+.learning-card{display:grid;grid-template-columns:280px minmax(0,1fr);border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);transition:border-color .2s}
+.learning-card:hover{border-color:var(--green)}
+.learning-cover{background:var(--soft);padding:30px;display:flex;flex-direction:column;justify-content:space-between;min-height:275px}
+.learning-cover .eyebrow{font-size:10px;letter-spacing:1.5px}.cover-caption{font-size:9px;letter-spacing:2px;color:var(--green)}
+.learning-bars{display:flex;align-items:flex-end;height:130px;gap:12px;border-bottom:1px solid var(--green);padding:0 10px 8px}
+.learning-bars i{display:block;flex:1;border-radius:4px 4px 0 0;background:#95b7a1;height:45%}.learning-bars i:nth-child(2){height:65%}.learning-bars i:nth-child(3){height:52%}.learning-bars i:nth-child(4){height:85%;background:var(--green)}.learning-bars i:nth-child(5){height:71%}.learning-bars i:nth-child(6){height:95%;background:var(--green)}
+.learning-copy{padding:30px 34px;min-width:0}.learning-card-meta{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:11px}.learning-copy h3{font-size:25px;margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:15px}.learning-copy h3 svg{color:var(--green);flex-shrink:0}.learning-copy p{font-size:13px;color:var(--muted);line-height:1.9;margin-top:13px;max-width:650px}.learning-copy .tag-list{margin:18px 0 23px}.learning-card-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;color:var(--muted)}
+@media(max-width:760px){.learning-card{grid-template-columns:1fr}.learning-cover{min-height:170px;padding:23px}.learning-bars{height:90px;max-width:230px;width:100%;align-self:center}.learning-copy{padding:23px}.learning-copy h3{font-size:23px}.learning-card-bottom{flex-wrap:wrap}.learning-cover .eyebrow{font-size:9px}.cover-caption{font-size:8px}}
+</style>
