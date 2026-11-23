@@ -1,0 +1,9 @@
+---
+import Icon from './Icon.astro';
+import { koreanCompiler as compiler } from '../data/korean-compiler';
+---
+<a class="project-tile compiler-card" href={compiler.href}>
+  <div class="project-art compiler-art" aria-hidden="true"><span class="project-number">04 · LANGUAGE & COMPILERS</span><div class="compiler-art-code"><span>만일</span> 가 는 나 보다<br/>크다면 <span>출력</span> 가; 이다</div><span class="art-label">SOURCE → TREE → CODE</span></div>
+  <div class="project-tile-content"><p class="eyebrow">{compiler.period} · 수업 프로젝트</p><h2>{compiler.title}<Icon name="external" size={21}/></h2><p>{compiler.description}</p><div class="tag-list">{compiler.technologies.slice(0,3).map(tech=><span>{tech}</span>)}</div></div>
+</a>
+<style>.compiler-art{background:var(--soft);color:var(--green)}.compiler-art-code{padding:25px;font-family:ui-monospace,'Noto Sans KR Variable',monospace;font-size:20px;line-height:1.9;letter-spacing:-.5px}.compiler-art-code span{font-weight:800}.compiler-art .project-number{font-size:9px;letter-spacing:1px}.compiler-art .art-label{font-size:8px;letter-spacing:2px}@media(max-width:1100px){.compiler-art-code{font-size:17px;padding:20px}}@media(max-width:760px){.compiler-art-code{font-size:22px}}</style>
