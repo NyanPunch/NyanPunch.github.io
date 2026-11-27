@@ -1,0 +1,9 @@
+---
+import Icon from './Icon.astro';
+import { awsCondor as project } from '../data/aws-condor';
+---
+<a class="project-tile cloud-card" href={project.href}>
+  <div class="project-art cloud-art" aria-hidden="true"><span class="project-number">05 · CLOUD COMPUTING</span><div class="cloud-art-flow"><span>EC2</span><i>↕ SSH</i><span>Condor</span></div><span class="art-label">PROVISION · INSPECT · REUSE</span></div>
+  <div class="project-tile-content"><p class="eyebrow">{project.period} · 수업 프로젝트</p><h2>{project.title}<Icon name="external" size={21}/></h2><p>{project.description}</p><div class="tag-list">{['Java','AWS EC2','HTCondor'].map(tech=><span>{tech}</span>)}</div></div>
+</a>
+<style>.cloud-art{background:#e8eef1;color:#3b6576}.cloud-art-flow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}.cloud-art-flow>span{font-size:26px;font-weight:700;letter-spacing:-.5px}.cloud-art-flow>i{font-size:11px;font-style:normal;letter-spacing:2px}.cloud-art .project-number{font-size:9px;letter-spacing:1px}.cloud-art .art-label{font-size:8px;letter-spacing:1.5px}@media(max-width:1100px){.cloud-art-flow>span{font-size:23px}}@media(max-width:760px){.cloud-art-flow>span{font-size:28px}}</style>
