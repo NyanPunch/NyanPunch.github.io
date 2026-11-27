@@ -127,3 +127,4 @@ HTTP 요청이 성공했어도 응답 본문에 인증 오류나 서비스 오�
 1. [예측 모델보다 데이터 수집부터 시작한 이유](/posts/bus-eta-01-project-introduction/)
 2. **TAGO 버스 도착정보 수집하기 — 호출 예산과 PostgreSQL 원본 저장** — 현재 글
 3. [저장한 도착정보를 다시 실험하기 — 정규화와 오프라인 재생](/posts/bus-eta-03-normalization-replay/)
+4. [차량 ID 없이 버스 관측을 연결하는 방법](/posts/bus-eta-04-vehicle-tracking/)

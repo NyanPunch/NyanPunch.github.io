@@ -84,3 +84,4 @@ ETA 예측과 평가
 1. **프로젝트를 시작한 이유와 해결하려는 문제** — 현재 글
 2. [TAGO 버스 도착정보 수집하기 — 호출 예산과 PostgreSQL 원본 저장](/posts/bus-eta-02-tago-collection/)
 3. [저장한 도착정보를 다시 실험하기 — 정규화와 오프라인 재생](/posts/bus-eta-03-normalization-replay/)
+4. [차량 ID 없이 버스 관측을 연결하는 방법](/posts/bus-eta-04-vehicle-tracking/)
