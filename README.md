@@ -69,6 +69,7 @@ sample: false
 - 사이트 이름·이메일·GitHub 주소: `src/config.ts`
 - 자기소개: `src/pages/about.astro`
 - 프로젝트 내용·자료: `src/data/projects.ts`
+- AWS·Condor 관리 도구: `src/data/aws-condor.ts` (기능·개발 기록·출처), `src/pages/projects/aws-condor.astro` (상세 페이지). 기능 설명은 원본 소스 기준이며 AWS 자원 실행 결과는 포함하지 않습니다.
 - 한국어 문법 컴파일러: `src/data/korean-compiler.ts` (출처·원본 예제), `src/pages/projects/korean-compiler.astro` (구현 설명). 원본 CP949 예제는 사이트에서 UTF-8로 표시합니다.
 - 공공데이터 학습 기록: `src/data/public-data-learning.ts` (과정·원본 노트북 링크), `src/pages/projects/public-data-analysis.astro` (상세 페이지). 프로젝트 목록 하단의 학습 기록 카드로 연결됩니다.
 - 기존 포트폴리오에 있던 완성된 프로젝트 3개를 표시합니다. 예시 링크가 있던 4번 항목은 데이터에 보존했지만 화면에 표시하지 않습니다.
