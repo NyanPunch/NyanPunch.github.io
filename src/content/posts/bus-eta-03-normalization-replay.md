@@ -150,3 +150,4 @@ python -m bus_eta_predict.cli replay `
 2. [TAGO 버스 도착정보 수집하기 — 호출 예산과 PostgreSQL 원본 저장](/posts/bus-eta-02-tago-collection/)
 3. **저장한 도착정보를 다시 실험하기 — 정규화와 오프라인 재생** — 현재 글
 4. [차량 ID 없이 버스 관측을 연결하는 방법](/posts/bus-eta-04-vehicle-tracking/)
+5. [같은 버스 관측을 3초와 2초로 재생하면 무엇이 달라질까?](/posts/bus-eta-05-tracking-evaluation/)
